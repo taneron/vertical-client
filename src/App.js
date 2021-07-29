@@ -6,21 +6,26 @@ import Entry from './pages/entry/Entry'
 import AddEntry from './pages/entry/AddEntry'
 import styled from 'styled-components'
 import { Suspense } from 'react'
+import { QueryClient, QueryClientProvider } from 'react-query'
+
+const queryClient = new QueryClient()
 
 function App() {
   return (
     <Suspense fallback="Lädt">
-      <AppWrapper>
-        <Router>
-          <Switch>
-            <Route exact path="/" component={Plants} />
-            <Route path="/plant/:id" component={Plant} />
-            <Route path="/search" component={Search} />
-            <Route path="/:plantId/:entryId" component={Entry} />
-            <Route path="/entry/add" component={AddEntry} />
-          </Switch>
-        </Router>
-      </AppWrapper>
+      <QueryClientProvider client={queryClient}>
+        <AppWrapper>
+          <Router>
+            <Switch>
+              <Route exact path="/" component={Plants} />
+              <Route exact path="/plant/:id" component={Plant} />
+              <Route path="/search" component={Search} />
+              <Route path="/:plantId/:entryId" component={Entry} />
+              <Route path="/entry/add" component={AddEntry} />
+            </Switch>
+          </Router>
+        </AppWrapper>
+      </QueryClientProvider>
     </Suspense>
   )
 }

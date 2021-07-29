@@ -1,7 +1,15 @@
 import React from 'react'
+import { useParams, useHistory, Link } from 'react-router-dom'
 
 function Entries() {
-  return <div>all entries of plant</div>
+  const { id } = useParams()
+  const history = useHistory()
+  return (
+    <div>
+      <button onClick={() => history.goBack()}>Zurück</button>
+      all entries of plant {id}
+    </div>
+  )
 }
 
 export default Entries

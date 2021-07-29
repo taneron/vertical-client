@@ -8,7 +8,7 @@ function PlantCard({ image, title, link, name }) {
     <Grid item xs={12}>
       <Link to={`/plant/${title}`}>
         <Paper>
-          <h3>{title}</h3>
+          <h3>#{title}</h3>
           <p>{name}</p>
         </Paper>
       </Link>
