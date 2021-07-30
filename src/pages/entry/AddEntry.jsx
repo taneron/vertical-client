@@ -2,7 +2,7 @@ import { useState } from 'react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import styled from 'styled-components'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import axios from 'axios'
 
 const API = process.env.REACT_APP_API || 'http://localhost:5000/api/v1/'
@@ -14,6 +14,7 @@ function AddEntry() {
   const [ph, setPh] = useState()
   const [notiz, setNotiz] = useState('')
   const [error, setError] = useState('')
+  const history = useHistory()
 
   const handleSubmit = () => {
     let data = new FormData()
@@ -22,13 +23,16 @@ function AddEntry() {
     data.append('image', image)
     data.append('ph', ph)
     data.append('notiz', notiz)
+
     axios({
       method: 'post',
       url: `${API}entry`,
       data: data,
       headers: { 'Content-Type': 'multipart/form-data' },
     })
-      .then((res) => console.log(res))
+      .then((res) => {
+        history.push(`/plant/${res?.data?.id}`)
+      })
       .catch((err) => setError(err.message))
   }
 
@@ -37,7 +41,7 @@ function AddEntry() {
       <H1 margin="-5px">Eintrag erstellen</H1>
       <p>Für Pflanze #{refrenceNo}</p>
       <FullWidth>
-        <Form autoComplete="off" onSubmit={handleSubmit}>
+        <Form autoComplete="off">
           <div>
             <input
               onChange={(e) => setImage(e.target.files[0])}
@@ -91,6 +95,7 @@ function AddEntry() {
             variant="contained"
             color="secondary"
             size="big"
+            onClick={handleSubmit}
             //poor mans validation
             disabled={!ph || !biomass}
           >
