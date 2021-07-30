@@ -11,52 +11,52 @@ import {
 } from 'recharts'
 import styled from 'styled-components'
 
-const data = [
-  {
-    name: 'Page A',
-    biomass: 4000,
-    ph: 2400,
-    height: 10000,
-  },
-  {
-    name: 'Page B',
-    biomass: 3000,
-    ph: 1398,
-    height: 2210,
-  },
-  {
-    name: 'Page C',
-    biomass: 2000,
-    ph: 9800,
-    height: 2290,
-  },
-  {
-    name: 'Page D',
-    biomass: 2780,
-    ph: 3908,
-    height: 2000,
-  },
-  {
-    name: 'Page E',
-    biomass: 1890,
-    ph: 4800,
-    height: 2181,
-  },
-  {
-    name: 'Page F',
-    biomass: 2390,
-    ph: 3800,
-    height: 2500,
-  },
-  {
-    name: 'Page G',
-    biomass: 3490,
-    ph: 4300,
-    height: 2100,
-  },
-]
+// const data = [
+//   {
+//     name: 'Page A',
+//     biomass: 4000,
+//     ph: 2400,
+//     height: 10000,
+//   },
+//   {
+//     name: 'Page B',
+//     biomass: 3000,
+//     ph: 1398,
+//     height: 2210,
+//   },
+//   {
+//     name: 'Page C',
+//     biomass: 2000,
+//     ph: 9800,
+//     height: 2290,
+//   },
+//   {
+//     name: 'Page D',
+//     biomass: 2780,
+//     ph: 3908,
+//     height: 2000,
+//   },
+//   {
+//     name: 'Page E',
+//     biomass: 1890,
+//     ph: 4800,
+//     height: 2181,
+//   },
+//   {
+//     name: 'Page F',
+//     biomass: 2390,
+//     ph: 3800,
+//     height: 2500,
+//   },
+//   {
+//     name: 'Page G',
+//     biomass: 3490,
+//     ph: 4300,
+//     height: 2100,
+//   },
+// ]
 
-function Chart() {
+function Chart({ data }) {
   return (
     <>
       <LineChart
@@ -73,8 +73,10 @@ function Chart() {
         <Tooltip />
         <Line strokeWidth={2} type="monotone" dataKey="ph" stroke="#14964a" activeDot={{ r: 8 }} />
         <Line strokeWidth={2} type="monotone" dataKey="biomass" stroke="#7ab330" />
+        <Line strokeWidth={2} type="monotone" dataKey="height" stroke="#216121" />
+        <XAxis dataKey="date" />
       </LineChart>
-      <LineChart
+      {/* <LineChart
         width={window.innerWidth * 0.8}
         height={150}
         data={data}
@@ -87,8 +89,7 @@ function Chart() {
       >
         <XAxis dataKey="name" />
         <Tooltip />
-        <Line strokeWidth={2} type="monotone" dataKey="height" stroke="#216121" />
-      </LineChart>
+      </LineChart> */}
     </>
   )
 }

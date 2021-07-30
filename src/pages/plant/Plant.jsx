@@ -18,13 +18,20 @@ function Plant() {
   const { data } = useQuery('plant', () => axios.get(`${API}plant/${id}`))
   const plant = data?.data?.data
 
+  const chartData = plant?.entries?.map((entry) => ({
+    ph: entry?.ph,
+    height: Math.floor(Math.random() * 15),
+    biomass: entry?.biomass,
+    date: new Date(entry?.date).toLocaleDateString(),
+  }))
+
   return (
     <Wrapper>
       <H1 margin="-10px">Pflanze #{plant?.referenceNo}</H1>
       <p>{plant?.name}</p>
 
       <Cardd>
-        <Chart />
+        <Chart data={chartData} />
       </Cardd>
 
       <Einträge>
