@@ -1,7 +1,5 @@
 // import React from 'react'
-import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 import Grid from '@material-ui/core/Grid'
-
 import styled from 'styled-components'
 import Card from '@material-ui/core/Card'
 import CardActionArea from '@material-ui/core/CardActionArea'
@@ -10,35 +8,37 @@ import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
+import { useParams, useHistory, Link } from 'react-router-dom'
+import { useQuery } from 'react-query'
+import axios from 'axios'
+const API = process.env.REACT_APP_API || 'http://localhost:5000/api/v1/'
 
-function PlantCard({ image, title, link, name, id }) {
+function EntryCard({ id, date, image }) {
   const history = useHistory()
+  //   const { data } = useQuery('plant', () => axios.get(`${API}entry/${id}`))
+  //   const entry = data?.data
   return (
-    <Cardd key={id} onClick={() => history.push(`/plant/${id}`)}>
+    <Cardd key={id} onClick={() => history.push(`/entry/${id}`)}>
       <CardActionArea>
         <Image image={image || '/default.png'} title="Contemplative Reptile" />
-        <Content>
+        <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            #{title}
+            {new Date(date).toLocaleString()}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {name}
-          </Typography>
-        </Content>
+          {/* <Typography variant="body2" color="textSecondary" component="p">
+                {entry?.plant?.name}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                {entry?.plant?.referenceNo}
+              </Typography> */}
+        </CardContent>
       </CardActionArea>
-      {/* <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
-        </Button>
-      </CardActions> */}
+      {/* )} */}
     </Cardd>
   )
 }
 
-export default PlantCard
+export default EntryCard
 
 const Image = styled(CardMedia)`
   object-fit: cover;
@@ -50,9 +50,7 @@ const Content = styled(CardContent)`
 `
 
 const Cardd = styled.div`
-  /* box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px; */
-
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
   border-radius: 30px;
   overflow: hidden;
   margin-bottom: 30px;
