@@ -31,7 +31,8 @@ function AddEntry() {
       headers: { 'Content-Type': 'multipart/form-data' },
     })
       .then((res) => {
-        history.push(`/plant/${res?.data?.id}`)
+        console.log(res, res.data.id)
+        history.push(`/plant/${res?.data?.data?.id}`)
       })
       .catch((err) => setError(err.message))
   }
